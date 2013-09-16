@@ -6,6 +6,7 @@ module Stripe
       class_option :key, :aliases => :k
       class_option :env, :aliases => :e
       class_option :version, :aliases => :v
+
       protected
 
       def api_key
@@ -21,7 +22,7 @@ module Stripe
       end
 
       def stored_api_option option
-        if File.exists?(config_file)
+        if config_file_exists?
           if environment
             config[environment][option.to_s]
           else
@@ -31,7 +32,15 @@ module Stripe
       end
 
       def config
-        ParseConfig.new(config_file) if File.exists?(config_file)
+        @config ||= if config_file_exists?
+          ParseConfig.new config_file
+        else
+          ParseConfig.new File.open(config_file, 'w+').path
+        end
+      end
+
+      def config_file_exists?
+        File.exists? config_file
       end
 
       def config_file

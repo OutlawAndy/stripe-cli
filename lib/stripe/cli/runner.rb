@@ -9,6 +9,7 @@ module Stripe
       register Commands::Events, 'events', 'events', '/events'
       register Commands::Invoices, 'invoices', 'invoices', '/invoices'
       register Commands::BalanceTransactions, 'balance_transactions', 'balance_transactions', '/balance_transactions'
+      register Commands::Config, 'config', 'config', 'config [set VAR VALUE] [get VAR]'
     end
   end
 end

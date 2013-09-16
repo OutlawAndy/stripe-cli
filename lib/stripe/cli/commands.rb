@@ -9,6 +9,7 @@ module Stripe
       autoload :Events, 'stripe/cli/commands/events'
       autoload :Invoices, 'stripe/cli/commands/invoices'
       autoload :BalanceTransactions, 'stripe/cli/commands/balance_transactions'
+			autoload :Config, 'stripe/cli/commands/config'
     end
   end
 end
