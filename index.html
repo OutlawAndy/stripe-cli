@@ -1,0 +1,295 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
+  <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/script.js"></script>
+
+  <title>Stripe-cli</title>
+  <meta name="description" content="A command line interface to Stripe">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">Stripe-cli</h1>
+    </header>
+    <div id="container">
+      <p class="tagline">A command line interface to Stripe</p>
+      <div id="main" role="main">
+        <div class="download-bar">
+        <div class="inner">
+          <a href="https://github.com/OutlawAndy/stripe-cli/tarball/master" class="download-button tar"><span>Download</span></a>
+          <a href="https://github.com/OutlawAndy/stripe-cli/zipball/master" class="download-button zip"><span>Download</span></a>
+          <a href="https://github.com/OutlawAndy/stripe-cli" class="code">View Stripe-cli on GitHub</a>
+        </div>
+        <span class="blc"></span><span class="trc"></span>
+        </div>
+        <article class="markdown-body">
+          <h1>
+<a name="stripecli" class="anchor" href="#stripecli"><span class="octicon octicon-link"></span></a>Stripe::CLI</h1>
+
+<p>stripe-cli is a command line interface to <a href="https://stripe.com">Stripe</a>.</p>
+
+<p>Uses <a href="https://github.com/michaeldv/awesome_print">AwesomePrint</a> to provide very readable output on your command line.</p>
+
+<p><img src="./output.png" alt="example output"></p>
+
+<p>Note that all JSON-style epoch timestamps have been converted to <strong>real life</strong> DateTime stamps, your welcome!</p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<pre><code>$ gem install stripe-cli
+</code></pre>
+
+<p>you may also clone the repo and build the gem locally yourself</p>
+
+<pre><code>    $ git clone https://github.com/stripe-contrib/stripe-cli.git
+    $ cd ./stripe-cli
+    $ gem build stripe-cli.gemspec
+    $ gem install stripe-cli
+</code></pre>
+
+<blockquote>
+<p>because RubyGems looks <strong>first</strong> at the <strong>current directory</strong> before moving on to <a href="https://rubygems.org">rubygems.org</a>,  that last step will install the local gem you just built.</p>
+</blockquote>
+
+<h2>
+<a name="configuration" class="anchor" href="#configuration"><span class="octicon octicon-link"></span></a>Configuration</h2>
+
+<p>For authentication, pass your secret key using the <code>-k</code> or <code>--key</code> option</p>
+
+<pre><code>$ stripe events list -k XXXXXXXXXXXXXXXXXXXXXX
+</code></pre>
+
+<p>To use a specific api version, pass in the <code>-v</code> or <code>--version</code> option</p>
+
+<pre><code>$ stripe balance_transactions list -v "2013-08-13"
+</code></pre>
+
+<p>You may also store default configurations in a <code>~/.stripecli</code> file that conforms to the following example</p>
+
+<p><img src="./example.png" alt="example config file"></p>
+
+<p>You may also overide the default environment setting in your config file by passing in the <code>-e</code> or <code>--env</code> option</p>
+
+<pre><code>$ stripe customers find cust_123 --env=live
+</code></pre>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<pre><code>$ stripe
+
+Commands:
+  stripe balance         # show currently available and pending balance amounts
+  stripe charges         # find, list, create, capture, &amp; refund charges
+  stripe coupons         # find, list, create, &amp; delete coupons
+  stripe customers       # find, list, create, &amp; delete customers
+  stripe events          # find &amp; list events
+  stripe invoices        # find, list, pay, and close invoices
+  stripe plans           # find, list, create, &amp; delete plans
+  stripe recipients      # find, list, create &amp; delete recipients
+  stripe tokens          # find &amp; create tokens for bank accounts &amp; credit cards
+  stripe transactions    # find &amp; list balance transactions
+  stripe transfers       # find, list, &amp; create transfers
+</code></pre>
+
+<p>Any parameters accepted by the <a href="https://stripe.com/docs/api">stripe api</a> are acceptable options to pass into commands</p>
+
+<pre><code>$ stripe charges create [--amount=AMOUNT][--description=DESC][--card_number=NUM][--card_cvc=CVC][--card_exp_month=MM][--card_exp_year=YYYY]
+</code></pre>
+
+<p>or</p>
+
+<pre><code>$ stripe charges create [--amount=AMOUNT][--card=TOKEN_ID]
+</code></pre>
+
+<p>or</p>
+
+<pre><code>$ stripe charges create [--amount=AMOUNT][--customer=CUST_ID]
+</code></pre>
+
+<h2>
+<a name="uniform-behavior" class="anchor" href="#uniform-behavior"><span class="octicon octicon-link"></span></a>uniform behavior</h2>
+
+<p>The Stripe API is very consistant. Consistency makes using the api intuitive. What makes an api consistant? For one, uniform parameters across api resources. Here are a few examples of uniform behavior within this utility.</p>
+
+<h4>
+<a name="list-operations" class="anchor" href="#list-operations"><span class="octicon octicon-link"></span></a>list operations</h4>
+
+<p>specify how many results, between 1 and 100, should be returned (default is 10)</p>
+
+<pre><code>... list [--count=COUNT]
+</code></pre>
+
+<p>specify the starting index for this result set, relative to the entire result set (useful in combination with <code>--count</code> for paginating results)</p>
+
+<pre><code>... list [--offset=OFFSET]
+</code></pre>
+
+<p>Passing NO (or partial) arguments, will trigger an interactive menu</p>
+
+<pre><code>$ stripe charges create
+Amount in dollars: __
+</code></pre>
+
+<p>or</p>
+
+<pre><code>$ stripe charges create [--amount=AMOUNT]
+Name on Card: __
+</code></pre>
+
+<p>Api errors are rescued and their messages displayed for you to read easily.  No more <code>barfing</code> to <code>stdout</code>  ...hopefully</p>
+
+<p><img src="./error_message_display.png" alt="error rescue example"></p>
+
+<h3>
+<a name="charges" class="anchor" href="#charges"><span class="octicon octicon-link"></span></a>Charges</h3>
+
+<pre><code>$ stripe charges list
+$ stripe charge find ch_123
+$ stripe charge refund ch_123
+$ stripe charge capture ch_123
+$ stripe charge create
+</code></pre>
+
+<h3>
+<a name="tokens" class="anchor" href="#tokens"><span class="octicon octicon-link"></span></a>Tokens</h3>
+
+<pre><code>$ stripe token find tok_123
+$ stripe token create TYPE (bank_account or credit_card)
+</code></pre>
+
+<h3>
+<a name="customers" class="anchor" href="#customers"><span class="octicon octicon-link"></span></a>Customers</h3>
+
+<pre><code>$ stripe customers list
+$ stripe customer find cust_123
+$ stripe customer delete cust_123
+$ stripe customer create
+</code></pre>
+
+<h3>
+<a name="invoices" class="anchor" href="#invoices"><span class="octicon octicon-link"></span></a>Invoices</h3>
+
+<pre><code>$ stripe invoices list [--customer=CUST_ID]
+$ stripe invoice find inv_123
+$ stripe invoice close inv_123
+$ stripe invoice pay inv_123
+$ stripe invoice upcoming cust_123
+</code></pre>
+
+<h3>
+<a name="plans" class="anchor" href="#plans"><span class="octicon octicon-link"></span></a>Plans</h3>
+
+<pre><code>$ stripe plans list
+$ stripe plan find custom_plan_id
+$ stripe plan delete custom_plan_id
+$ stripe plan create
+</code></pre>
+
+<h3>
+<a name="coupons" class="anchor" href="#coupons"><span class="octicon octicon-link"></span></a>Coupons</h3>
+
+<pre><code>$ stripe coupons list
+$ stripe coupon find 25_off
+$ stripe coupon delete 25_off
+$ stripe coupon create
+</code></pre>
+
+<h3>
+<a name="events" class="anchor" href="#events"><span class="octicon octicon-link"></span></a>Events</h3>
+
+<pre><code>$ stripe events list
+$ stripe event find ev_123
+</code></pre>
+
+<h3>
+<a name="balancetransactions" class="anchor" href="#balancetransactions"><span class="octicon octicon-link"></span></a>BalanceTransactions</h3>
+
+<pre><code>$ stripe transactions list [--type=TYPE][--source=SOURCE_ID]
+$ stripe transaction find trx_123
+</code></pre>
+
+<h3>
+<a name="recipients" class="anchor" href="#recipients"><span class="octicon octicon-link"></span></a>Recipients</h3>
+
+<pre><code>$ stripe recipients list [--verified]
+$ stripe recipient find recip_123
+$ stripe recipient delete recip_123
+$ stripe recipient create
+</code></pre>
+
+<h3>
+<a name="transfers" class="anchor" href="#transfers"><span class="octicon octicon-link"></span></a>Transfers</h3>
+
+<pre><code>$ stripe transfers list [--recipient=RECIPIENT_ID][--status=STATUS]
+$ stripe transfer find trans_id
+$ stripe transfer create
+</code></pre>
+
+<h4>
+<a name="easter-egg-alert" class="anchor" href="#easter-egg-alert"><span class="octicon octicon-link"></span></a>Easter Egg Alert!</h4>
+
+<p>You can pass the <code>--balance</code> flag into <code>transfer create</code> to automatically set transfer <code>amount</code> equal to your currently available balance.</p>
+
+<p>example:</p>
+
+<pre><code>$ stripe transfer create --balance --recipient=self
+</code></pre>
+
+<blockquote>
+<p>No, its not magic.  The <code>--balance</code> flag just triggers a 'preflight' api call to retrieve your current balance and assigns that to the <code>--amount</code> option</p>
+</blockquote>
+
+<h2>
+<a name="road-map" class="anchor" href="#road-map"><span class="octicon octicon-link"></span></a>Road Map</h2>
+
+<ol>
+<li>test coverage, test coverage, test coverage!</li>
+<li>
+<code>--date</code> filters for all <code>list</code> operations</li>
+<li>
+<code>update</code> command operations</li>
+<li>support for <code>disputes</code> &amp; dispute handling</li>
+<li>support creating/updating config file through cli</li>
+<li>plug-able output formating for use in scripts and such</li>
+<li>request a feature you would like via the issue tracker</li>
+</ol><p>pull requests welcome</p>
+
+<p>report issues in the issues tracker</p>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/OutlawAndy" class="avatar"><img src="https://2.gravatar.com/avatar/ceb64614c967d84b3c1b1221c5b4b494?d=https%3A%2F%2Fidenticons.github.com%2F7cbbee8642e1570d20548222a3a7b45b.png&amp;s=30" width="48" height="48"/></a> <a href="https://github.com/OutlawAndy">OutlawAndy</a> maintains <a href="https://github.com/OutlawAndy/stripe-cli">Stripe-cli</a></p>
+
+
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br/>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a></small>
+      </div>
+    </footer>
+  </div>
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/OutlawAndy/stripe-cli/tarball/master" class="tar">tar</a><a href="https://github.com/OutlawAndy/stripe-cli/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+  
+</body>
+</html>
