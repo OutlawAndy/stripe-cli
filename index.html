@@ -143,8 +143,8 @@ at the root of each project declaring the test api key for the appropriate Strip
 <pre><code>$ stripe charges create [--amount=AMOUNT][--customer=CUST_ID]
 </code></pre>
 
-<h3>
-<a name="cursor-based-pagination" class="anchor" href="#cursor-based-pagination"><span class="octicon octicon-link"></span></a>cursor-based pagination</h3>
+<h2>
+<a name="cursor-based-pagination" class="anchor" href="#cursor-based-pagination"><span class="octicon octicon-link"></span></a>cursor-based pagination</h2>
 
 <p>for all <code>list</code> operations</p>
 
@@ -161,8 +161,8 @@ at the root of each project declaring the test api key for the appropriate Strip
 <pre><code>stripe events list --count=10 --offset=10
 </code></pre>
 
-<h3>
-<a name="interactive-menus" class="anchor" href="#interactive-menus"><span class="octicon octicon-link"></span></a>Interactive Menus</h3>
+<h2>
+<a name="interactive-menus" class="anchor" href="#interactive-menus"><span class="octicon octicon-link"></span></a>Interactive Menus</h2>
 
 <p>Passing NO (or partial) arguments to any operation, will trigger an interactive menu</p>
 
@@ -176,15 +176,15 @@ Amount in dollars: __
 Name on Card: __
 </code></pre>
 
-<h3>
-<a name="exception-recovery" class="anchor" href="#exception-recovery"><span class="octicon octicon-link"></span></a>Exception Recovery</h3>
+<h2>
+<a name="exception-recovery" class="anchor" href="#exception-recovery"><span class="octicon octicon-link"></span></a>Exception Recovery</h2>
 
 <p>Api errors are rescued and their messages displayed for you to read.  No more <code>barfing</code> to <code>stdout</code></p>
 
 <p><img src="https://github.com/OutlawAndy/stripe-cli/raw/master/error_message_display.png" alt="error rescue example"></p>
 
-<h3>
-<a name="charges" class="anchor" href="#charges"><span class="octicon octicon-link"></span></a>Charges</h3>
+<h2>
+<a name="charges" class="anchor" href="#charges"><span class="octicon octicon-link"></span></a>Charges</h2>
 
 <pre><code>Commands:
   stripe charges capture ID      # Capture a charge
@@ -195,8 +195,8 @@ Name on Card: __
   stripe charges refund ID       # Refund a charge
 </code></pre>
 
-<h3>
-<a name="tokens" class="anchor" href="#tokens"><span class="octicon octicon-link"></span></a>Tokens</h3>
+<h2>
+<a name="tokens" class="anchor" href="#tokens"><span class="octicon octicon-link"></span></a>Tokens</h2>
 
 <pre><code>Commands:
   stripe tokens create TYPE     # Create a new token of type TYPE(card or account)
@@ -204,8 +204,8 @@ Name on Card: __
   stripe tokens help [COMMAND]  # Describe subcommands or one specific subcommand
 </code></pre>
 
-<h3>
-<a name="cards" class="anchor" href="#cards"><span class="octicon octicon-link"></span></a>Cards</h3>
+<h2>
+<a name="cards" class="anchor" href="#cards"><span class="octicon octicon-link"></span></a>Cards</h2>
 
 <pre><code>Commands:
   stripe cards create --owner=OWNER     # Create a new card for OWNER (customer or recipient)
@@ -215,8 +215,8 @@ Name on Card: __
   stripe cards list --owner=OWNER       # List cards for OWNER (customer or recipient)
 </code></pre>
 
-<h3>
-<a name="customers" class="anchor" href="#customers"><span class="octicon octicon-link"></span></a>Customers</h3>
+<h2>
+<a name="customers" class="anchor" href="#customers"><span class="octicon octicon-link"></span></a>Customers</h2>
 
 <pre><code>Commands:
   stripe customers create          # Create a new customer
@@ -226,8 +226,8 @@ Name on Card: __
   stripe customers list            # List customers
 </code></pre>
 
-<h3>
-<a name="subscriptions" class="anchor" href="#subscriptions"><span class="octicon octicon-link"></span></a>Subscriptions</h3>
+<h2>
+<a name="subscriptions" class="anchor" href="#subscriptions"><span class="octicon octicon-link"></span></a>Subscriptions</h2>
 
 <pre><code>Commands:
   stripe subscriptions cancel ID --customer=CUSTOMER  # Cancel ID subscription for CUSTOMER customer
@@ -237,8 +237,8 @@ Name on Card: __
   stripe subscriptions list --customer=CUSTOMER       # List subscriptions for CUSTOMER customer
 </code></pre>
 
-<h3>
-<a name="invoices" class="anchor" href="#invoices"><span class="octicon octicon-link"></span></a>Invoices</h3>
+<h2>
+<a name="invoices" class="anchor" href="#invoices"><span class="octicon octicon-link"></span></a>Invoices</h2>
 
 <pre><code>Commands:
   stripe invoices close ID           # Close an unpaid invoice
@@ -249,8 +249,8 @@ Name on Card: __
   stripe invoices upcoming CUSTOMER  # find the upcoming invoice for CUSTOMER
 </code></pre>
 
-<h3>
-<a name="plans" class="anchor" href="#plans"><span class="octicon octicon-link"></span></a>Plans</h3>
+<h2>
+<a name="plans" class="anchor" href="#plans"><span class="octicon octicon-link"></span></a>Plans</h2>
 
 <pre><code>Commands:
   stripe plans create          # Create a new plan
@@ -260,8 +260,8 @@ Name on Card: __
   stripe plans list            # List plans
 </code></pre>
 
-<h3>
-<a name="coupons" class="anchor" href="#coupons"><span class="octicon octicon-link"></span></a>Coupons</h3>
+<h2>
+<a name="coupons" class="anchor" href="#coupons"><span class="octicon octicon-link"></span></a>Coupons</h2>
 
 <pre><code>Commands:
   stripe coupons create          # Create a new Coupon
@@ -271,8 +271,8 @@ Name on Card: __
   stripe coupons list            # List coupons
 </code></pre>
 
-<h3>
-<a name="events" class="anchor" href="#events"><span class="octicon octicon-link"></span></a>Events</h3>
+<h2>
+<a name="events" class="anchor" href="#events"><span class="octicon octicon-link"></span></a>Events</h2>
 
 <pre><code>Commands:
   stripe events find ID         # Find a event
@@ -280,8 +280,8 @@ Name on Card: __
   stripe events list            # List events
 </code></pre>
 
-<h3>
-<a name="balancetransactions" class="anchor" href="#balancetransactions"><span class="octicon octicon-link"></span></a>BalanceTransactions</h3>
+<h2>
+<a name="balancetransactions" class="anchor" href="#balancetransactions"><span class="octicon octicon-link"></span></a>BalanceTransactions</h2>
 
 <pre><code>Commands:
   stripe transactions find ID         # Find a transaction
@@ -289,8 +289,8 @@ Name on Card: __
   stripe transactions list [TYPE]     # List transactions, optionaly filter by type: ( charge refund adjustment application_fee application_fee_refund transfer transfer_failure )
 </code></pre>
 
-<h3>
-<a name="recipients" class="anchor" href="#recipients"><span class="octicon octicon-link"></span></a>Recipients</h3>
+<h2>
+<a name="recipients" class="anchor" href="#recipients"><span class="octicon octicon-link"></span></a>Recipients</h2>
 
 <pre><code>Commands:
   stripe recipients create          # Create a new recipient
@@ -300,8 +300,8 @@ Name on Card: __
   stripe recipients list            # List recipients
 </code></pre>
 
-<h3>
-<a name="transfers" class="anchor" href="#transfers"><span class="octicon octicon-link"></span></a>Transfers</h3>
+<h2>
+<a name="transfers" class="anchor" href="#transfers"><span class="octicon octicon-link"></span></a>Transfers</h2>
 
 <pre><code>Commands:
   stripe transfers create          # Create a new outgoing money transfer
