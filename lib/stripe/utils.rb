@@ -58,6 +58,15 @@ module Stripe
       end
     end
 
+    def retrieve_transfer id
+      begin
+        ::Stripe::Transfer.retrieve(id, api_key)
+      rescue Exception => e
+        ap e.message
+        false
+      end
+    end
+
     def retrieve_subscription cust, id
       begin
         cust.subscriptions.retrieve(id)

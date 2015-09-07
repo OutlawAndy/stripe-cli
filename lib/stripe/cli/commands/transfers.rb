@@ -47,6 +47,18 @@ module Stripe
           super Stripe::Transfer, options
         end
 
+        desc "reverse ID", "reverse a pending transfer"
+        option :amount, :desc => "how much of the transfer to reverse. all of it, by default."
+        option :refund_application_fee, :type => :boolean, :default => false, :desc => "Whether or not to refund the application fee"
+        option :description, :desc => "Arbitrary description for reversal"
+        option :metadata, :type => :hash, :desc => "a key/value store of additional user-defined data"
+        def reverse transfer_id
+          options[:amount] = convert_amount(options[:amount]) if options[:amount]
+          if transfer = retrieve_transfer(transfer_id)
+            request transfer.reversals, :create, options
+          end
+        end
+
         private
 
         def create_recipient
