@@ -113,7 +113,7 @@ module Stripe
       def pre_request_setup
         @strip_nils = strip_nils?
         @date_format = date_format
-        Stripe.api_key = api_key
+        Stripe.api_key ||= api_key
         Stripe.api_version = api_version unless api_version.nil?
       end
 

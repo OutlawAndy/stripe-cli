@@ -24,8 +24,9 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'bundler', '~> 1.3'
   spec.add_development_dependency 'rspec', '~> 2.12', '>= 2.12.0'
-  spec.add_runtime_dependency 'thor', '~> 0.18', '>= 0.18.1'
-  spec.add_runtime_dependency 'stripe', '~> 1.24.0', '>= 1.24.0'
+  spec.add_development_dependency 'webmock', '~> 3.4', '>= 3.4.2'
+  spec.add_runtime_dependency 'thor', '~> 0.20', '>= 0.20'
+  spec.add_runtime_dependency 'stripe', '~> 3.26.1', '>= 3.26.1'
   spec.add_runtime_dependency 'awesome_print', '~> 1.2', '>= 1.2.0'
   spec.add_runtime_dependency 'parseconfig', '~> 1.0', '>= 1.0.4'
   spec.add_runtime_dependency 'chronic', '~> 0.10', '>= 0.10.2'
